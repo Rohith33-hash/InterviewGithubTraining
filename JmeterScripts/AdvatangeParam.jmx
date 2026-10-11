@@ -2659,7 +2659,7 @@
                 <collectionProp name="Arguments.arguments">
                   <elementProp name="" elementType="HTTPArgument">
                     <boolProp name="HTTPArgument.always_encode">false</boolProp>
-                    <stringProp name="Argument.value">{&quot;username&quot;:&quot;Rohit&quot;,&quot;password&quot;:&quot;Demouser@143&quot;}</stringProp>
+                    <stringProp name="Argument.value">{&quot;username&quot;:&quot;${Username}&quot;,&quot;password&quot;:&quot;${Password}&quot;}</stringProp>
                     <stringProp name="Argument.metadata">=</stringProp>
                   </elementProp>
                 </collectionProp>
