@@ -4,7 +4,7 @@ on:
   push:
     branches: [main]
     paths:
-      - 'JmeterScripts**'
+      - 'JmeterScripts/AdvantageParam.jmx'
       - '.github/workflows/jmeter.yml'
   pull_request:
     branches: [main]
@@ -12,12 +12,32 @@ on:
     inputs:
       script:
         description: 'Path to the JMX script'
-        default: 'JmeterScripts/AdvantageBank.jmx'
+        default: 'JmeterScripts/AdvantageParam.jmx'
+        required: true
+      threads:
+        description: 'no of users to run'
+        default: '1'
+        required: true
+      loop:
+        description: 'no of loops to run'
+        default: '1'
+        required: true
+      rampup:
+        description: 'no of users to ramup in seconds'
+        default: '1'
+        required: true
+      csvdata:
+        description: 'File Path of test data'
+        default: 'TestData/TestData.csv'
         required: true
 
 env:
   JMETER_VERSION: '5.6.3'
-  JMX_FILE: ${{ github.event.inputs.script || 'JmeterScripts/AdvantageBank.jmx' }}
+  JMX_FILE: ${{ github.event.inputs.script || 'JmeterScripts/AdvantageParam.jmx' }}
+  THREADS: ${{ github.event.inputs.threads || '1' }}
+  LOOP:    ${{ github.event.inputs.loop || '1' }}
+  RAMPUP: ${{ github.event.inputs.rampup || '1' }}
+  CSVFILE: ${{ github.event.inputs.csvdata || 'TestData/TestData.csv' }}
 
 jobs:
   jmeter:
@@ -50,6 +70,10 @@ jobs:
           apache-jmeter-${JMETER_VERSION}/bin/jmeter -n \
             -t "$JMX_FILE" \
             -l results/results.jtl \
+            -Jthreads="$THREADS" \
+            -Jloop="$LOOP" \
+            -Jrampup="$RAMPUP" \
+            -Jcsvdata="$CSVFILE" \
             -j results/jmeter.log \
             -e -o results/html-report
       - name: Fail on sampler errors
