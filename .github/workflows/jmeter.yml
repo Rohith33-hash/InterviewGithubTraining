@@ -4,7 +4,7 @@ on:
   push:
     branches: [main]
     paths:
-      - 'JmeterScripts/AdvantageParam.jmx'
+      - 'JmeterScripts/AdvatageParam.jmx'
       - '.github/workflows/jmeter.yml'
   pull_request:
     branches: [main]
@@ -12,7 +12,7 @@ on:
     inputs:
       script:
         description: 'Path to the JMX script'
-        default: 'JmeterScripts/AdvantageParam.jmx'
+        default: 'JmeterScripts/AdvatageParam.jmx'
         required: true
       threads:
         description: 'no of users to run'
@@ -33,7 +33,7 @@ on:
 
 env:
   JMETER_VERSION: '5.6.3'
-  JMX_FILE: ${{ github.event.inputs.script || 'JmeterScripts/AdvantageParam.jmx' }}
+  JMX_FILE: ${{ github.event.inputs.script || 'JmeterScripts/AdvatageParam.jmx' }}
   THREADS: ${{ github.event.inputs.threads || '1' }}
   LOOP:    ${{ github.event.inputs.loop || '1' }}
   RAMPUP: ${{ github.event.inputs.rampup || '1' }}
